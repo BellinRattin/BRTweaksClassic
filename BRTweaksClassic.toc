@@ -1,0 +1,10 @@
+## Interface: 11302	
+## Title: BR UI Tweaks
+## Notes: Some tweaks and small mod for the base Blizzard's Interface
+## Author: BellinRattin
+## Version: 0.0.1
+## LoadWith: Blizzard_TalkingHeadUI
+
+BlackMagic.lua
+
+BRTweaksClassic.lua
