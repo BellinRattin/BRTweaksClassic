@@ -311,3 +311,48 @@ sortButton:SetPoint("TOP", ContainerFrame1CloseButton, "BOTTOM", -1, 4)
 sortButton:SetSize(20, 20)
 sortButton:SetText("S")
 sortButton:SetScript("OnClick", F.StartSorting)
+
+
+
+function F.CountEmptySpaces()
+	local emptySpaces = 0
+	for bag = BACKPACK_CONTAINER , NUM_BAG_SLOTS do
+		for slot = 1, GetContainerNumSlots(bag) do
+			local item = GetContainerItemInfo(bag,slot)
+			if not item then
+				emptySpaces = emptySpaces + 1
+			end
+		end
+	end
+	return emptySpaces
+end
+
+function F.CountGrayItems()
+	local greyCount = 0
+	for bag = BACKPACK_CONTAINER , NUM_BAG_SLOTS do
+		for slot = 1, GetContainerNumSlots(bag) do
+			local item = GetContainerItemInfo(bag,slot)
+			if not item then
+				greyCount = greyCount + 1
+			end
+		end
+	end
+	return greyCount
+end
+
+local function CycleThroughBags(fun, init, ...)
+	local ret = init or 0
+	for bag = BACKPACK_CONTAINER , NUM_BAG_SLOTS do
+		for slot = 1, GetContainerNumSlots(bag) do
+			fun(bag, slot, ret, ...)
+		end
+	end
+	return ret
+end
+
+local function GetEmpty(bag, slot, ret)
+	local item = GetContainerItemInfo(bag,slot)
+	if not item then
+		ret = ret + 1
+	end
+end
